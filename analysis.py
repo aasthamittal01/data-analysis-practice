@@ -2,15 +2,22 @@ import pandas as pd
 
 print("Data Analysis Practice Started")
 
-data = {
-    "Student": ["A", "B", "C", "D"],
-    "Marks": [85, 90, 78, 92]
-}
+# Read CSV file
+df = pd.read_csv("student.csv")
 
-df = pd.DataFrame(data)
-
-print("\nDataset:")
+print("\nFull Dataset:")
 print(df)
 
-print("\nAverage Marks:")
-print(df["Marks"].mean())
+# Basic statistics
+print("\nAverage Marks in Each Subject:")
+print(df.mean(numeric_only=True))
+
+print("\nHighest Math Score:")
+print(df["Math"].max())
+
+print("\nLowest Science Score:")
+print(df["Science"].min())
+
+print("\nTotal Marks of Each Student:")
+df["Total"] = df[["Math", "Science", "English"]].sum(axis=1)
+print(df[["Student", "Total"]])
